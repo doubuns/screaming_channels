@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-LABEL Camurati Giovanni giovanni.camurati@eurecom.fr
+LABEL "Camurati Giovanni"=giovanni.camurati@eurecom.fr
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Prepare the system
