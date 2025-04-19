@@ -62,7 +62,7 @@ RUN apt-get install -yq \
 RUN useradd -ms /bin/bash screaming \
     && echo "screaming:screaming" | chpasswd && adduser screaming sudo \
     && echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
-    && chown -R screaming:screaming /home/screaming \
+    && chown -R screaming:screaming /home/screaming
 
 WORKDIR /home/screaming
 USER screaming
