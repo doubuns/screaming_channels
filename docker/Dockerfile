@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
-MAINTAINER Camurati Giovanni giovanni.camurati@eurecom.fr
-ENV DEBIAN_FRONTEND noninteractive
+LABEL Camurati Giovanni giovanni.camurati@eurecom.fr
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Prepare the system
 RUN apt-get update && apt-get install -yq \
@@ -19,6 +19,7 @@ RUN mkdir /home/screaming \
      && cd screaming_channels \
      && git checkout ches20 \
      && cd /home/screaming/screaming_channels/experiments/src/ \
+     && pip install singledispatch \
      && python2 setup.py develop
 
 # Install firmware
@@ -52,12 +53,16 @@ RUN apt-get install -yq \
     && make install \
     && ldconfig \
     && cd ../python_hel \
-    && python2 setup.py install
+    && python2 setup.py install \
+    && pip uninstall patsy -y \
+    && pip install patsy==0.5.3
     #&& make TYPE=aes_simple
 
 # Install screaming channels
 RUN useradd -ms /bin/bash screaming \
     && echo "screaming:screaming" | chpasswd && adduser screaming sudo \
-    && chown -R screaming:screaming /home/screaming
+    && echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && chown -R screaming:screaming /home/screaming \
+
 WORKDIR /home/screaming
 USER screaming

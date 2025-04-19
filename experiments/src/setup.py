@@ -19,7 +19,7 @@ setup(
         "matplotlib==2.2.3",
         "enum34",
         "pmt==0.0.3",
-        "pyts==0.9.0",
+        "pyts==0.7.3",
         "llvmlite==0.30.0",
         "numba==0.46.0",
         "statsmodels==0.8.0",
